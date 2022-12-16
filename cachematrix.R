@@ -1,4 +1,12 @@
 #makeCacheMatrix Function
+
+## Cache function to cache the inverse of the matrix
+## Usually generating single inverse of a matrix may result in faster computational time.
+## Larger datasets involving large number of inverse calculations however will be slow.
+## The functions written below creates a matrix and caches its inverse.
+
+##This function creates a special "matrix" object that can cache its inverse.
+
 makeCacheMatrix <- function(x = matrix()) {
   inv <- NULL
   set <- function(y) {
@@ -14,6 +22,12 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 #cacheSolve Function
+
+## This function takes the matrix generated above 
+## and calculates its inverse if not calculated earlier 
+## behaving like a cache memory of the inverse matrix.
+## Return a matrix that is the inverse of 'x'
+
 cacheSolve <- function(x, ...) {
   inv <- x$getinverse()
   if(!is.null(inv)) {
@@ -25,11 +39,3 @@ cacheSolve <- function(x, ...) {
   x$setinverse(inv)
   inv
 }
-
-#Testing the functions created
-my_Matrix <- makeCacheMatrix(matrix(1:4, 2, 2))
-my_Matrix$get()
-my_Matrix$getinverse()
-
-cacheSolve(my_Matrix)
-cacheSolve(my_Matrix)
